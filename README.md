@@ -1,4 +1,37 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# POS Management System (Laravel)
+
+A simple Point-of-Sale web application built with **Laravel 12** for the IT0049 Web System Technologies course (TFA5).
+
+## Pages
+
+- `/` - Landing page
+- `/about` - About the system
+- `/customers` - Customer Accounts listing (static array)
+- `/users` - User Accounts listing (static array)
+
+## Requirements
+
+- PHP >= 8.2
+- Composer
+- MySQL (optional, for migrations/seeders)
+
+## Local Setup
+
+1. Clone the repository.
+2. Copy `.env.example` to `.env` and configure database credentials.
+3. Run `composer install`.
+4. Run `php artisan key:generate`.
+5. Run `php artisan migrate --force`.
+6. Run `php artisan db:seed --force`.
+7. Start the dev server: `php artisan serve`.
+8. Visit `http://localhost:8000`.
+
+## Tech Stack
+
+- Laravel 12
+- Blade templating
+- Static PHP arrays for temporary data
+- MySQL with migrations and seeders
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
