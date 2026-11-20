@@ -36,27 +36,50 @@
         <h1>User Accounts</h1>
         <p class="subtitle">A listing of system users using static data.</p>
 
+        <div class="mb-3">
+            <a href="{{ route('users.create') }}" class="btn btn-primary">+ Add New User</a>
+        </div>
+
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th style="width: 50px;">Avatar</th>
+                    <th>Username</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($users as $user)
                 <tr>
-                    <td>{{ $user['id'] }}</td>
-                    <td>{{ $user['name'] }}</td>
+                                        <td style="width: 50px;">
+                        @if($user['avatar'])
+                            <img src="{{ asset($user['avatar']) }}" alt="{{ $user['full_name'] }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                        @else
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center;">
+                                <i style="color: #6b7280; font-size: 1.2rem;">👤</i>
+                            </div>
+                        @endif
+                    </td>
+                    <td>{{ $user['username'] }}</td>
+                    <td>{{ $user['full_name'] }}</td>
                     <td>{{ $user['email'] }}</td>
                     <td>{{ $user['role'] }}</td>
                     <td>
                         <span class="badge {{ $user['status'] === 'Active' ? 'badge-active' : 'badge-inactive' }}">
                             {{ $user['status'] }}
                         </span>
+                    </td>
+                    <td>
+                        <a href="{{ route('users.edit', $user['id']) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form method="POST" action="{{ route('users.destroy', $user['id']) }}" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

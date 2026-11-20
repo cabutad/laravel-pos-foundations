@@ -34,6 +34,10 @@
         <h1>Customer Accounts</h1>
         <p class="subtitle">A listing of registered customers using static data.</p>
 
+        <div class="mb-3">
+            <a href="{{ route('customers.create') }}" class="btn btn-primary">+ Add New Customer</a>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -52,6 +56,14 @@
                     <td>{{ $customer['email'] }}</td>
                     <td>{{ $customer['phone'] }}</td>
                     <td><span class="badge">{{ $customer['joined'] }}</span></td>
+                    <td>
+                        <a href="{{ route('customers.edit', $customer['id']) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form method="POST" action="{{ route('customers.destroy', $customer['id']) }}" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
